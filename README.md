@@ -52,16 +52,20 @@ file -> video.mp4
 duration -> 8 (duration of video)
 
 ### For trim : /video/trim
+```sh
 body -> {
     "videoId" : "id",
     "startTime" : "0",
     "endTime" : "4"
 }
+```
 
 ### For merge : /video/merge
+```sh
 body -> {
     "videoIds" : [ id1, id2, id3 ]
 }
+```
 
 ### For downloading : /video/download/:id
 
