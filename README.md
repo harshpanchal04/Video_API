@@ -4,6 +4,9 @@ Welcome to the **Video Files REST API** project! This project provides a compreh
 
 ## Getting Started
 
+### Jest Testing Video - https://drive.google.com/file/d/1AXnWGZZXqvDTCgNL6ZMk9SJnOeIvq2tl/view?usp=sharing
+### Demo PostMan Testing Video - https://drive.google.com/file/d/12hH64aAvk5WtkWRNMaCBHHoSv4M7frf1/view?usp=sharing
+
 ### Prerequisites
 
 Ensure you have the following installed:
@@ -48,12 +51,12 @@ Note : You can also use your own file for testing by replacing it with tests/tes
 ## API End Points
 
 ### For upload : /video/upload
-file -> video.mp4
-duration -> 8 (duration of video)
+file : video.mp4
+duration : 8 (duration of video)
 
 ### For trim : /video/trim
 ```sh
-body -> {
+{
     "videoId" : "id",
     "startTime" : "0",
     "endTime" : "4"
@@ -62,7 +65,7 @@ body -> {
 
 ### For merge : /video/merge
 ```sh
-body -> {
+{
     "videoIds" : [ id1, id2, id3 ]
 }
 ```
