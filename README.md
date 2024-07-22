@@ -2,10 +2,10 @@
 
 Welcome to the **Video Files REST API** project! This project provides a comprehensive backend solution for handling video files, including upload, trimming, merging, and link sharing functionalities.
 
-## Getting Started
+#### Project Testing using Jest -> https://drive.google.com/file/d/1AXnWGZZXqvDTCgNL6ZMk9SJnOeIvq2tl/view?usp=sharing
+#### Project Testing PostMan - https://drive.google.com/file/d/12hH64aAvk5WtkWRNMaCBHHoSv4M7frf1/view?usp=sharing
 
-### Jest Testing Video - https://drive.google.com/file/d/1AXnWGZZXqvDTCgNL6ZMk9SJnOeIvq2tl/view?usp=sharing
-### Demo PostMan Testing Video - https://drive.google.com/file/d/12hH64aAvk5WtkWRNMaCBHHoSv4M7frf1/view?usp=sharing
+## Getting Started
 
 ### Prerequisites
 
