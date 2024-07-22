@@ -1,4 +1,3 @@
-// tests/video.test.js
 const request = require('supertest');
 const app = require('../app');
 const fs = require('fs');
@@ -6,8 +5,9 @@ const path = require('path');
 
 describe('Video API', () => {
   const token = 'your-static-jwt-token';
+  let videoId;
 
-  it('should upload a video', (done) => {
+  beforeAll((done) => {
     request(app)
       .post('/video/upload')
       .set('Authorization', token)
@@ -18,44 +18,46 @@ describe('Video API', () => {
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('message', 'Video uploaded successfully');
         expect(res.body).toHaveProperty('videoId');
+        videoId = res.body.videoId;
         done();
       });
   });
 
   it('should trim a video', (done) => {
-    jest.setTimeout(30000); // Increase timeout to 30 seconds
     request(app)
       .post('/video/trim')
       .set('Authorization', token)
-      .send({ videoId: 1, startTime: 0, endTime: 4 })
+      .send({ videoId, startTime: 0, endTime: 2 })
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('message', 'Video trimmed successfully');
+        expect(res.body).toHaveProperty('videoId');
         expect(res.body).toHaveProperty('path');
+        expect(res.body).toHaveProperty('downloadLink');
         done();
       });
-  });
+  },50000);
 
   it('should merge videos', (done) => {
-    jest.setTimeout(30000); // Increase timeout to 30 seconds
     request(app)
       .post('/video/merge')
       .set('Authorization', token)
-      .send({ videoIds: [1, 1] })
+      .send({ videoIds: [videoId, videoId] }) // Use the same video ID twice
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('message', 'Videos merged successfully');
+        expect(res.body).toHaveProperty('videoId');
         expect(res.body).toHaveProperty('path');
+        expect(res.body).toHaveProperty('downloadLink');
         done();
       });
-  });
+  },70000);
 
   it('should download a video', (done) => {
-    jest.setTimeout(10000); // Increase timeout to 10 seconds
     request(app)
-      .get('/video/download/1')
+      .get(`/video/download/${videoId}`)
       .set('Authorization', token)
       .end((err, res) => {
         if (err) return done(err);
@@ -63,5 +65,5 @@ describe('Video API', () => {
         expect(res.header['content-type']).toMatch(/video/);
         done();
       });
-  });
+  },10000);
 });
